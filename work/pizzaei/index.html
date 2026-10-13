@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پیتزائی | نمونه‌کار هویت بصری</title>
+<meta name="description" content="هویت بصری پیتزائی: یک شکل که هم نماد است، هم E و هم «ئی».">
+<meta name="theme-color" content="#761415">
+<link rel="icon" href="/assets/brand/favicon.svg">
+<link rel="stylesheet" href="/assets/case/book.css">
+<style>
+/* concept scene: E -> symbol -> rotated 90deg -> «ئی» */
+.cx{--a:clamp(0,(var(--p) - .1)/.14,1);--r:clamp(0,(var(--p) - .32)/.2,1);--m:clamp(0,(var(--p) - .56)/.18,1);--f:clamp(0,(var(--p) - .8)/.1,1);--z:clamp(0,(var(--p) - .93)/.05,1)}
+.cx .scene__stick{background:#fff}
+.cx__in{display:grid;justify-items:center}
+.cx__stage{position:relative;width:min(500px,76vw);aspect-ratio:1075/474;container-type:size}
+.cx__e{position:absolute;left:50%;top:50%;transform:translate(-50%,-52%) scale(calc(1 - var(--a) * .15));font:200 100cqh/1 Outfit,sans-serif;color:#cfccc4;opacity:calc(1 - var(--a))}
+.cx__col{color:color-mix(in srgb,#B2000C calc(var(--f) * 100%),#101820)}
+.cx__sym{position:absolute;height:calc((90 - 12.8 * var(--m)) * 1cqh);left:calc((50 - 31.02 * var(--m)) * 1cqw);top:calc((50 - 2.64 * var(--m)) * 1cqh);transform:translate(-50%,-50%) rotate(calc(var(--r) * -90deg));opacity:calc(var(--a) * (1 - var(--z)))}
+.cx__rest{position:absolute;inset:0;width:100%;height:100%;opacity:calc(var(--m) * (1 - var(--z)));transform:translateX(calc((1 - var(--m)) * -6cqw))}
+.cx__hz{position:absolute;inset:0;width:100%;height:100%;opacity:calc(var(--f) * (1 - var(--z)));transform:translateY(calc((1 - var(--f)) * -8cqh))}
+.cx__full{position:absolute;inset:0;width:100%;height:100%;color:#B2000C;opacity:var(--z)}
+.cx__guide{position:absolute;left:calc(18.98cqw - 18cqw);top:calc(47.36cqh - 22cqh);width:36cqw;height:44cqh;border:1px dashed #b9b6ae;border-radius:2px;opacity:calc(var(--r) * (1 - var(--m)))}
+.cx__deg{position:absolute;left:50%;top:-14px;transform:translateX(-50%);opacity:calc(var(--r) * (1 - var(--m)))}
+
+/* logo colour tiles */
+.tiles{display:flex;flex-wrap:wrap;justify-content:center;gap:0}
+.tile{width:150px;height:96px;display:grid;place-items:center;background:var(--b);color:var(--c);transition:transform .5s var(--ease)}
+.tile:hover{transform:translateY(-6px)}
+.tile-cap{display:flex;flex-wrap:wrap;justify-content:center;gap:0;margin-top:8px}
+.tile-cap span{width:150px;text-align:center;color:var(--muted)}
+
+/* pizza = proportion pie */
+.pizza{position:relative}
+.pizza::after{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(from 22.5deg,transparent 0 44.4deg,rgba(255,255,255,.85) 44.4deg 45deg);opacity:var(--p)}
+.pizza-wrap{position:relative;padding:10px;border-radius:50%;box-shadow:0 0 0 1px #e9e3d2,0 0 0 9px #f4ead0,0 0 0 10px #e3d5b0}
+
+/* live patterns */
+.pats{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
+.pat{width:210px}
+.pat__box{position:relative;height:210px;overflow:hidden;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+.pat__in{position:absolute;inset:-90px 0 0;background:var(--pc,#B2000C);-webkit-mask:var(--m) 0 0/var(--ms) repeat;mask:var(--m) 0 0/var(--ms) repeat;transform:translateY(calc(var(--p,0) * 80px));transition:background .4s}
+.pat--grid .pat__in{-webkit-mask:url(/assets/case/marks/pizzaei-mark.png) 0 0/13px 24px space;mask:url(/assets/case/marks/pizzaei-mark.png) 0 0/13px 24px space}
+.swatches{display:flex;justify-content:center;gap:8px;margin-top:26px}
+.swatches button{width:22px;height:22px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(16,24,32,.15);transition:transform .3s}
+.swatches button[aria-pressed=true]{transform:scale(1.25);box-shadow:0 0 0 2px #fff,0 0 0 3px var(--c)}
+
+/* frame scene */
+.fr .scene__stick{background:#fff}
+.fr__box{height:min(200px,30svh);width:calc(var(--fw,1.6) * min(200px,30svh));border:1.5px solid #101820;border-radius:var(--fr) 0 0 var(--fr);display:grid;place-items:center;transition:none}
+.fr__read{display:flex;gap:28px;justify-content:center;margin-top:26px;direction:ltr}
+.fr__read span{display:grid;gap:2px;text-align:center}
+
+/* voice scene */
+.vc .scene__stick{transition:background .6s var(--ease),color .6s}
+.vc[data-step="0"] .scene__stick,.vc[data-step="2"] .scene__stick{background:#FFFDE8;color:#B2000C}
+.vc[data-step="1"] .scene__stick,.vc[data-step="3"] .scene__stick{background:#B2000C;color:#FFFDE8}
+.vc__in{display:grid;grid-template-columns:auto auto;align-items:center;gap:clamp(28px,6vw,90px)}
+.vc__ch{width:min(250px,34vw);background:#fff;border-radius:22% 0 0 22% / 18% 0 0 18%;overflow:hidden;transform:rotate(calc(var(--k,0) * 1deg));transition:transform .8s var(--ease);box-shadow:0 30px 60px -30px rgba(0,0,0,.35)}
+.vc__ch img{width:100%}
+.vc[data-step="1"] .vc__ch{--k:-3}.vc[data-step="2"] .vc__ch{--k:2}.vc[data-step="3"] .vc__ch{--k:-1.5}
+.vc__k{font-size:.9rem;opacity:.8}
+.vc__words{position:relative;height:1.35em;font-size:clamp(2.4rem,6vw,4.4rem);font-weight:900;line-height:1.3;min-width:5.2em}
+.vc__words span{position:absolute;inset:0;opacity:0;transform:translateY(40%);transition:opacity .45s,transform .6s var(--ease)}
+.vc__words span.is-on{opacity:1;transform:none}
+.vc__rule{margin-top:18px;font-size:.78rem;opacity:.75}
+.vc__en{margin-top:28px}
+@media (max-width:700px){.vc__in{grid-template-columns:1fr;justify-items:center;text-align:center}.vc__ch{width:44vw}}
+
+/* hierarchy (live Vazirmatn) */
+.hier{width:min(720px,100%);margin-inline:auto;border-top:1px solid var(--line)}
+.hier>div{display:grid;grid-template-columns:70px 170px 1fr;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.hier .caps{color:var(--muted)}
+.hier .mono{color:var(--muted)}
+@media (max-width:700px){.hier>div{grid-template-columns:1fr}}
+
+/* min sizes */
+.minsz td:nth-child(2){width:46%}
+
+/* back cover */
+.back{position:relative;height:88svh;min-height:520px;background:#761415;color:#fff;display:grid;place-items:center;overflow:hidden}
+.back svg{position:absolute;left:-4%;right:-4%;bottom:-8%;width:108%;height:auto;opacity:.1;transform:translateX(calc(var(--p,0) * -60px))}
+.back .cover__meta{z-index:1}
+</style>
+</head>
+<body style="--tone:#761415;--on-tone:#fff;--accent:#B2000C;--paper:#fff;--soft:#FBFAF3;--line:#ebe8df">
+<header class="bar">
+  <a class="bar__site" href="/" aria-label="Adplace"><img src="/assets/brand/adplace-ink.svg" alt="Adplace" width="73" height="18" style="display:block;height:18px;width:auto"></a>
+  <span class="bar__mid caps">PIZZAEI BRAND BOOK · <span class="mono">01/04</span></span>
+  <a class="bar__back" href="/#work">همه‌ی نمونه‌کارها <span aria-hidden="true">←</span></a>
+  <span class="bar__p" aria-hidden="true"></span>
+</header>
+<main>
+
+<section class="cover" style="--cover-h:64px">
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">01</span></div>
+  <span class="mk " role="img" aria-label="نماد پیتزائی" style="--src:url(/assets/case/marks/pizzaei-mark.png);--ar:0.55;height:64px;"></span>
+  <div class="cover__meta"><span class="caps">Pizzaei Brand Book</span><span class="caps" style="opacity:.6">Version 1.0 — 2026</span></div>
+  <div class="cover__fa">هویت بصری و بسته‌بندی</div>
+  <div class="cover__hint"><span class="caps">Scroll</span><i></i></div>
+</section>
+
+<section class="pg " id="concept" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">03</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>E like Enjoy</h2></div><span class="lbl caps">Brand Concept</span></header>
+  
+<div class="intro"><div class="rv"><h1>پیتزائی<small>پیتزافروشی جوان و شهری · برندبوک ۴۰ صفحه‌ای · ۲۰۲۶</small></h1><p>پیتزائی سریع، شاد و بی‌تکلف است. کل هویت از یک شکل رشد می‌کند: حرف E که با یک خط نرم کشیده شده نماد برند می‌شود و با چرخش ۹۰ درجه، «ئی» پایان نام فارسی را می‌سازد.</p></div><div class="rv rv-d1"><dl class="facts"><div><dt>صنعت</dt><dd>غذا و رستوران</dd></div><div><dt>نسخه</dt><dd><span class="en">1.0 — 2026</span></dd></div><div><dt>فصل‌ها</dt><dd>۹ فصل · ۴۰ صفحه</dd></div><div><dt>رنگ اصلی</dt><dd><span class="en">PANTONE 7621 C</span></dd></div><div><dt>تایپ‌فیس</dt><dd><span class="en">Barlow · Vazirmatn</span></dd></div><div><dt>مجوز فونت‌ها</dt><dd><span class="en">SIL Open Font</span></dd></div></dl><div class="chips"><span>Young</span><span>Cheerful</span><span>Friendly</span><span>Fast</span><span>Minimal</span></div></div></div>
+<div style="height:clamp(56px,8vw,96px)"></div>
+<nav class="toc rv" aria-label="فهرست"><a href="#logo"><span>Logo</span><span>04</span></a><a href="#structure"><span>Structure</span><span>09</span></a><a href="#color"><span>Color</span><span>15</span></a><a href="#type"><span>Typeface</span><span>21</span></a><a href="#pattern"><span>Pattern</span><span>24</span></a><a href="#frame"><span>Frame</span><span>28</span></a><a href="#dodont"><span>Do &amp; Don&#x27;t</span><span>32</span></a><a href="#voice"><span>Character &amp; Voice</span><span>34</span></a><a href="#apps"><span>Applications</span><span>37</span></a></nav>
+</section>
+
+<section class="divider" id="logo" data-p="pass">
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">04</span></div>
+  <span class="divider__n mono">01</span>
+  <div class="divider__t"><span class="caps">Logo</span><span class="fa">لوگو</span></div>
+</section>
+
+<section class="scene cx" data-p="scene" data-steps="4" style="--len:3.2" aria-label="مفهوم لوگو">
+  <div class="scene__stick">
+    <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">05</span></div>
+    <div class="cx__in">
+      <span class="lbl caps" style="margin-bottom:46px">Logo Concept</span>
+      <div class="cx__stage">
+        <span class="cx__e" aria-hidden="true">E</span>
+        <span class="cx__guide" aria-hidden="true"></span>
+        <span class="cx__col"><span class="mk cx__rest" aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-logo-fa-rest.png);--ar:2.2679;"></span><span class="mk cx__hz" aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-hamza.png);--ar:2.2679;"></span><span class="mk cx__sym" aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-mark.png);--ar:0.55;"></span></span>
+        <span class="mk cx__full" role="img" aria-label="لوگوتایپ پیتزائی" style="--src:url(/assets/case/marks/pizzaei-logo-fa.png);--ar:2.2679;"></span>
+      </div>
+      <div class="steps"><span data-s="0">Latin E</span><em>→</em><span data-s="1">Symbol</span><em>→</em><span data-s="2">Rotated 90°</span><em>→</em><span data-s="3">«ئی»</span></div>
+      <div class="says">
+        <p data-s="0">همه‌چیز از یک حرف شروع شد: E، حرف اول Enjoy.</p>
+        <p data-s="1">E با یک خط نرم و یکدست بازطراحی شد و نماد برند شد.</p>
+        <p data-s="2">همان شکل را ۹۰ درجه بچرخانید…</p>
+        <p data-s="3">…و «ئی» پایان پیتزائی ساخته می‌شود. یک شکل، سه کاربرد.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pg " id="logos" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">06</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>سه نسخه، یک خانواده</h2></div><span class="lbl caps">Logotype &amp; Symbol</span></header>
+  
+<div class="trio rv">
+  <div><span class="mk " role="img" aria-label="لوگوتایپ فارسی" style="--src:url(/assets/case/marks/pizzaei-logo-fa.png);--ar:2.2679;height:40px;"></span><div class="cap"><span class="caps">Persian Logotype</span><span class="fa">نشان اصلی برند</span></div></div>
+  <div><span class="mk " role="img" aria-label="لوگوتایپ انگلیسی" style="--src:url(/assets/case/marks/pizzaei-logo.png);--ar:3.7531;height:26px;"></span><div class="cap"><span class="caps">English Logotype</span><span class="fa">برای منو، وب و مخاطب غیرفارسی</span></div></div>
+  <div><span class="mk " role="img" aria-label="نماد" style="--src:url(/assets/case/marks/pizzaei-mark.png);--ar:0.55;height:48px;"></span><div class="cap"><span class="caps">Symbol</span><span class="fa">برای فضای کوچک، مهر، آیکون و یونیفرم</span></div></div>
+</div>
+</section>
+
+<section class="divider" id="structure" data-p="pass">
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">09</span></div>
+  <span class="divider__n mono">02</span>
+  <div class="divider__t"><span class="caps">Structure</span><span class="fa">ساختار</span></div>
+</section>
+
+<section class="pg " id="construction" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">10</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>هندسه‌ی نماد</h2><p>همه‌چیز با یک واحد اندازه‌گیری می‌شود: ضخامت خط، w</p></div><span class="lbl caps">Symbol Construction</span></header>
+  
+<div class="blk" data-p="view" data-steps="5" style="align-items:center">
+  <figure class="fig rv zoom" data-full="/assets/case/pizzaei/construct.jpg" style="--w:250px"><img src="/assets/case/pizzaei/construct.jpg" width="761" height="1203" alt="ساختار نماد" loading="lazy" decoding="async" class="" style=""></figure>
+  <dl class="specs"><div data-s=0><dt>ضخامت خط</dt><dd>w</dd></div><div data-s=1><dt>شعاع بیرونی</dt><dd>1.2w</dd></div><div data-s=2><dt>شعاع داخلی</dt><dd>0.2w</dd></div><div data-s=3><dt>زاویه‌ی قطری‌ها</dt><dd>20°</dd></div><div data-s=4><dt>ابعاد نماد</dt><dd>6w × 3.2w</dd></div></dl>
+</div>
+</section>
+
+<section class="pg pg--soft" id="logostruct" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">11</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>لوگوتایپ‌ها روی همان واحد</h2></div><span class="lbl caps">Logotype Structure</span></header>
+  
+<div class="blk blk--col">
+  <figure class="fig rv zoom" data-full="/assets/case/pizzaei/struct-fa.jpg" style="--w:520px"><img src="/assets/case/pizzaei/struct-fa.jpg" width="1400" height="621" alt="ساختار لوگوتایپ فارسی" loading="lazy" decoding="async" class="" style=""><figcaption class="cap"><span class=caps>Persian logotype</span><span class=fa>بالاروی 5w · ارتفاع x برابر 3.2w · پایین‌روی 2.2w</span></figcaption></figure>
+  <figure class="fig rv zoom" data-full="/assets/case/pizzaei/struct-en.jpg" style="--w:520px"><img src="/assets/case/pizzaei/struct-en.jpg" width="1400" height="391" alt="ساختار لوگوتایپ انگلیسی" loading="lazy" decoding="async" class="" style=""><figcaption class="cap"><span class=caps>English logotype</span><span class=fa>یک ضخامت خط · فاصله‌ی حروف 0.7w · پایه‌ی Λ با زاویه‌ی ۲۰ درجه</span></figcaption></figure>
+</div>
+</section>
+
+<section class="pg " id="clear" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">13</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>فضای آزاد و کوچک‌ترین اندازه</h2><p>فضای آزاد = 2X؛ X همان نقطه‌ی «ز» است (برابر w)</p></div><span class="lbl caps">Clear Space &amp; Minimum Size</span></header>
+  
+<div class="blk blk--col">
+  <figure class="fig rv zoom" data-full="/assets/case/pizzaei/clear.jpg" style="--w:640px"><img src="/assets/case/pizzaei/clear.jpg" width="1400" height="334" alt="فضای آزاد" loading="lazy" decoding="async" class="" style=""></figure>
+  <table class="table minsz rv" style="margin-top:56px">
+    <tr><td>Persian logotype</td><td><span class="mk " aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-logo-fa.png);--ar:2.2679;width:72px;"></span></td><td class="v">72 px · 18 mm</td></tr>
+    <tr><td>English logotype</td><td><span class="mk " aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-logo.png);--ar:3.7531;width:96px;"></span></td><td class="v">96 px · 24 mm</td></tr>
+    <tr><td>Symbol</td><td><span class="mk " aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-mark.png);--ar:0.55;height:24px;"></span></td><td class="v">24 px · 7 mm</td></tr>
+    <tr><td>Horizontal lockup</td><td><span style="display:inline-flex;gap:5px;align-items:center"><span class="mk " aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-mark.png);--ar:0.55;height:20px;"></span><span class="mk " aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-logo-fa.png);--ar:2.2679;height:18px;"></span></span></td><td class="v">110 px · 28 mm</td></tr>
+  </table>
+  <p class="cap rv"><span class="fa">نشان‌ها در اندازه‌ی واقعی دیجیتال · برای چاپ فلکسو روی کارتن ۱٫۵ برابر</span></p>
+</div>
+</section>
+
+<section class="divider" id="color" data-p="pass">
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">15</span></div>
+  <span class="divider__n mono">03</span>
+  <div class="divider__t"><span class="caps">Color</span><span class="fa">رنگ</span></div>
+</section>
+
+<section class="pg " id="colors" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">16</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>یک قرمز، پنج همراه</h2><p>برای کپی کد، روی هر رنگ بزنید · منسوجات: PANTONE 18-1553 TCX · کرافت فقط جنس بسته‌بندی است و چاپ نمی‌شود</p></div><span class="lbl caps">Main &amp; Secondary Colors</span></header>
+  
+<div class="blk" style="align-items:flex-end"><div class="cards rv"><button class="cc cc--main" data-hex="#B2000C" style="--c:#B2000C;--t:#FFFFFF;--i:0" aria-label="Pizzaei Red #B2000C"><b>Pizzaei Red</b><span><small>PANTONE <strong>7621 C</strong></small><small>RGB <strong>178 0 12</strong></small><small>HEX <strong>#B2000C</strong></small><small>CMYK <strong>0 100 93 30</strong></small></span></button></div><div class="cards rv"><button class="cc" data-hex="#761415" style="--c:#761415;--t:#FFFFFF;--i:0" aria-label="Oven Burgundy #761415"><b>Oven Burgundy</b><span><small>PANTONE <strong>1815 C</strong></small><small>RGB <strong>118 20 21</strong></small><small>HEX <strong>#761415</strong></small><small>CMYK <strong>0 83 82 54</strong></small></span></button><button class="cc is-light" data-hex="#FFFDE8" style="--c:#FFFDE8;--t:#101820;--i:1" aria-label="Dough Cream #FFFDE8"><b>Dough Cream</b><span><small> <strong>Process</strong></small><small>RGB <strong>255 253 232</strong></small><small>HEX <strong>#FFFDE8</strong></small><small>CMYK <strong>0 1 9 0</strong></small></span></button><button class="cc" data-hex="#D9D7D2" style="--c:#D9D7D2;--t:#101820;--i:2" aria-label="Stone #D9D7D2"><b>Stone</b><span><small> <strong>Process</strong></small><small>RGB <strong>217 215 210</strong></small><small>HEX <strong>#D9D7D2</strong></small><small>CMYK <strong>0 1 3 15</strong></small></span></button><button class="cc" data-hex="#101820" style="--c:#101820;--t:#FFFFFF;--i:3" aria-label="Ink #101820"><b>Ink</b><span><small>PANTONE <strong>Black 6 C</strong></small><small>RGB <strong>16 24 32</strong></small><small>HEX <strong>#101820</strong></small><small>CMYK <strong>60 40 40 100</strong></small></span></button><button class="cc" data-hex="#F2B33D" style="--c:#F2B33D;--t:#101820;--i:4" aria-label="Cheese #F2B33D"><b>Cheese</b><span><small>PANTONE <strong>7409 C</strong></small><small>RGB <strong>242 179 61</strong></small><small>HEX <strong>#F2B33D</strong></small><small>CMYK <strong>0 26 75 5</strong></small></span></button></div></div>
+</section>
+
+<section class="pg pg--soft" id="share" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">19</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>سهم هر رنگ، روی یک پیتزا</h2><p>خنثی‌های روشن جلو می‌آیند؛ قرمز فقط تأکید است</p></div><span class="lbl caps">Brand Colors Percentage</span></header>
+  
+<div class="blk" data-p="view" style="align-items:center;gap:clamp(36px,7vw,110px)">
+  <div class="pizza-wrap"><div class="pie pizza" style="--pie:conic-gradient(#FFFDE8 0 40%,#D9D7D2 40% 60%,#B2000C 60% 80%,#101820 80% 90%,#761415 90% 97%,#F2B33D 97% 100%)"></div></div>
+  <div class="legend">
+    <div><i style="--c:#FFFDE8"></i><span>Cream</span><b><span data-count="40">0</span>%</b></div>
+    <div><i style="--c:#D9D7D2"></i><span>Stone</span><b><span data-count="20">0</span>%</b></div>
+    <div><i style="--c:#B2000C"></i><span>Red</span><b><span data-count="20">0</span>%</b></div>
+    <div><i style="--c:#101820"></i><span>Ink</span><b><span data-count="10">0</span>%</b></div>
+    <div><i style="--c:#761415"></i><span>Burgundy</span><b><span data-count="7">0</span>%</b></div>
+    <div><i style="--c:#F2B33D"></i><span>Cheese</span><b><span data-count="3">0</span>%</b></div>
+  </div>
+  <div class="tints"><div class="r"><span>Red</span><i style="--c:color-mix(in srgb,#B2000C 100%,#fff);--t:#FFFFFF;--d:0">100</i><i style="--c:color-mix(in srgb,#B2000C 80%,#fff);--t:#FFFFFF;--d:1">80</i><i style="--c:color-mix(in srgb,#B2000C 60%,#fff);--t:#FFFFFF;--d:2">60</i><i style="--c:color-mix(in srgb,#B2000C 40%,#fff);--t:#101820;--d:3">40</i><i style="--c:color-mix(in srgb,#B2000C 20%,#fff);--t:#101820;--d:4">20</i></div><div class="r"><span>Burgundy</span><i style="--c:color-mix(in srgb,#761415 100%,#fff);--t:#FFFFFF;--d:5">100</i><i style="--c:color-mix(in srgb,#761415 80%,#fff);--t:#FFFFFF;--d:6">80</i><i style="--c:color-mix(in srgb,#761415 60%,#fff);--t:#FFFFFF;--d:7">60</i><i style="--c:color-mix(in srgb,#761415 40%,#fff);--t:#101820;--d:8">40</i><i style="--c:color-mix(in srgb,#761415 20%,#fff);--t:#101820;--d:9">20</i></div><div class="r"><span>Stone</span><i style="--c:color-mix(in srgb,#D9D7D2 100%,#fff);--t:#101820;--d:10">100</i><i style="--c:color-mix(in srgb,#D9D7D2 80%,#fff);--t:#101820;--d:11">80</i><i style="--c:color-mix(in srgb,#D9D7D2 60%,#fff);--t:#101820;--d:12">60</i><i style="--c:color-mix(in srgb,#D9D7D2 40%,#fff);--t:#101820;--d:13">40</i><i style="--c:color-mix(in srgb,#D9D7D2 20%,#fff);--t:#101820;--d:14">20</i></div><div class="r"><span>Ink</span><i style="--c:color-mix(in srgb,#101820 100%,#fff);--t:#FFFFFF;--d:15">100</i><i style="--c:color-mix(in srgb,#101820 80%,#fff);--t:#FFFFFF;--d:16">80</i><i style="--c:color-mix(in srgb,#101820 60%,#fff);--t:#FFFFFF;--d:17">60</i><i style="--c:color-mix(in srgb,#101820 40%,#fff);--t:#101820;--d:18">40</i><i style="--c:color-mix(in srgb,#101820 20%,#fff);--t:#101820;--d:19">20</i></div><div class="r"><span>Cheese</span><i style="--c:color-mix(in srgb,#F2B33D 100%,#fff);--t:#101820;--d:20">100</i><i style="--c:color-mix(in srgb,#F2B33D 80%,#fff);--t:#101820;--d:21">80</i><i style="--c:color-mix(in srgb,#F2B33D 60%,#fff);--t:#101820;--d:22">60</i><i style="--c:color-mix(in srgb,#F2B33D 40%,#fff);--t:#101820;--d:23">40</i><i style="--c:color-mix(in srgb,#F2B33D 20%,#fff);--t:#101820;--d:24">20</i></div></div>
+</div>
+</section>
+
+<section class="pg " id="variety" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">20</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>ترکیب‌های مجاز</h2></div><span class="lbl caps">Logo Color Variety</span></header>
+  <div class="rv"><div class="tiles"><div class="tile" style="--b:#fff;--c:#B2000C;box-shadow:inset 0 0 0 1px var(--line)"><span class="mk " aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-logo-fa.png);--ar:2.2679;height:26px;"></span></div><div class="tile" style="--b:#fff;--c:#101820;box-shadow:inset 0 0 0 1px var(--line)"><span class="mk " aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-logo-fa.png);--ar:2.2679;height:26px;"></span></div><div class="tile" style="--b:#B2000C;--c:#fff;"><span class="mk " aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-logo-fa.png);--ar:2.2679;height:26px;"></span></div><div class="tile" style="--b:#C9A67A;--c:#101820;"><span class="mk " aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-logo-fa.png);--ar:2.2679;height:26px;"></span></div><div class="tile" style="--b:#FFFDE8;--c:#B2000C;box-shadow:inset 0 0 0 1px var(--line)"><span class="mk " aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-logo-fa.png);--ar:2.2679;height:26px;"></span></div></div><div class="tile-cap"><span class="caps">Red on white</span><span class="caps">Ink on white</span><span class="caps">White on red</span><span class="caps">Ink on kraft</span><span class="caps">Red on cream</span></div></div>
+</section>
+
+<section class="divider" id="type" data-p="pass">
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">21</span></div>
+  <span class="divider__n mono">04</span>
+  <div class="divider__t"><span class="caps">Typeface</span><span class="fa">تایپ‌فیس</span></div>
+</section>
+
+<section class="pg " id="typeface" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">23</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>Barlow و Vazirmatn</h2><p>هر دو خانواده با مجوز آزاد SIL؛ سلسله‌مراتب زیر با خود Vazirmatn و اندازه‌های برندبوک چیده شده</p></div><span class="lbl caps">Typeface &amp; Hierarchy</span></header>
+  
+<div class="blk blk--col">
+  <figure class="fig rv zoom" data-full="/assets/case/pizzaei/type.jpg" style="--w:640px"><img src="/assets/case/pizzaei/type.jpg" width="1400" height="476" alt="نمونه‌ی تایپ‌فیس‌ها" loading="lazy" decoding="async" class="" style=""></figure>
+  <div class="hier rv" style="margin-top:48px">
+    <div><span class="caps">H1</span><span class="mono">Vazirmatn Black 36/44</span><span style="font-weight:900;font-size:36px;line-height:44px">پیتزای هفته</span></div>
+    <div><span class="caps">H2</span><span class="mono">Vazirmatn Bold 24/32</span><span style="font-weight:700;font-size:24px;line-height:32px">منوی پیتزاهای ایتالیائی</span></div>
+    <div><span class="caps">Body</span><span class="mono">Vazirmatn Regular 11/18</span><span style="font-size:14px;line-height:23px">خمیر تازه، پنیر موتزارلا، سس گوجه‌ی خانگی و ریحان تازه.</span></div>
+    <div><span class="caps">Price</span><span class="mono">Vazirmatn Black 16/20</span><span style="font-weight:900;font-size:20px;color:#B2000C">۲۸۵٬۰۰۰ تومان</span></div>
+    <div><span class="caps">Label</span><span class="mono">Barlow Medium caps 9/12</span><span class="caps" style="font-size:11px;color:var(--ink)">New · Hot · Spicy</span></div>
+  </div>
+</div>
+</section>
+
+<section class="divider" id="pattern" data-p="pass">
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">24</span></div>
+  <span class="divider__n mono">05</span>
+  <div class="divider__t"><span class="caps">Pattern</span><span class="fa">پترن</span></div>
+</section>
+
+<section class="pg " id="patterns" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">26</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>از منحنی وسط «ئی»</h2><p>ماژول 2.98w تکرار می‌شود و ردیف‌ها نصف گام جابه‌جا می‌شوند · هر پترن فقط یک رنگ؛ هرگز چرخانده یا کشیده نمی‌شود</p></div><span class="lbl caps">Pattern</span></header>
+  
+<div class="blk blk--col">
+  <figure class="fig rv zoom" data-full="/assets/case/pizzaei/pat-instr.jpg" style="--w:620px"><img src="/assets/case/pizzaei/pat-instr.jpg" width="1400" height="290" alt="ساخت پترن" loading="lazy" decoding="async" class="" style=""><figcaption class="cap"><span class=caps>Module «ئی» → repeat, rows offset ½ step → wave</span></figcaption></figure>
+  <div class="pats" data-p="pass" style="margin-top:64px">
+    <div class="pat rv"><div class="pat__box"><div class="pat__in" style="--m:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2230%22%20viewBox%3D%220%200%2040%2030%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%223.6%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M-10%208a5%205%200%200%201%2010%200a5%205%200%200%200%2010%200a5%205%200%200%201%2010%200a5%205%200%200%200%2010%200a5%205%200%200%201%2010%200a5%205%200%200%200%2010%200%22/%3E%3Cpath%20d%3D%22M-20%2023a5%205%200%200%201%2010%200a5%205%200%200%200%2010%200a5%205%200%200%201%2010%200a5%205%200%200%200%2010%200a5%205%200%200%201%2010%200a5%205%200%200%200%2010%200a5%205%200%200%201%2010%200%22/%3E%3C/g%3E%3C/svg%3E');--ms:40px 30px"></div></div><div class="cap"><span class="caps">Wave</span></div></div>
+    <div class="pat pat--grid rv rv-d1"><div class="pat__box"><div class="pat__in"></div></div><div class="cap"><span class="caps">Symbol grid</span></div></div>
+    <div class="pat rv rv-d2"><div class="pat__box"><div class="pat__in" style="--m:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%22120%22%20viewBox%3D%220%200%20120%20120%22%3E%3Crect%20x%3D%224%22%20y%3D%223%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Ccircle%20cx%3D%2225%22%20cy%3D%225%22%20r%3D%222.6%22/%3E%3Crect%20x%3D%2242%22%20y%3D%224%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2266%22%20y%3D%223%22%20width%3D%2212%22%20height%3D%225%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2285%22%20y%3D%225%22%20width%3D%2212%22%20height%3D%225%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%22102%22%20y%3D%226%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%228%22%20y%3D%2226%22%20width%3D%2212%22%20height%3D%225%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2223%22%20y%3D%2227%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2242%22%20y%3D%2226%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2262%22%20y%3D%2223%22%20width%3D%2212%22%20height%3D%225%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2288%22%20y%3D%2223%22%20width%3D%2212%22%20height%3D%225%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%22103%22%20y%3D%2226%22%20width%3D%2212%22%20height%3D%225%22%20rx%3D%222.5%22/%3E%3Ccircle%20cx%3D%227%22%20cy%3D%2249%22%20r%3D%222.6%22/%3E%3Crect%20x%3D%2223%22%20y%3D%2242%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2247%22%20y%3D%2243%22%20width%3D%2212%22%20height%3D%225%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2266%22%20y%3D%2247%22%20width%3D%2212%22%20height%3D%225%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2282%22%20y%3D%2246%22%20width%3D%2212%22%20height%3D%225%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%22107%22%20y%3D%2246%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%224%22%20y%3D%2265%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2225%22%20y%3D%2264%22%20width%3D%2212%22%20height%3D%225%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2248%22%20y%3D%2263%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2263%22%20y%3D%2262%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Ccircle%20cx%3D%2289%22%20cy%3D%2268%22%20r%3D%222.6%22/%3E%3Crect%20x%3D%22107%22%20y%3D%2265%22%20width%3D%2212%22%20height%3D%225%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%222%22%20y%3D%2282%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2223%22%20y%3D%2288%22%20width%3D%2212%22%20height%3D%225%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%2245%22%20y%3D%2285%22%20width%3D%2212%22%20height%3D%225%22%20rx%3D%222.5%22/%3E%3Ccircle%20cx%3D%2270%22%20cy%3D%2285%22%20r%3D%222.6%22/%3E%3Ccircle%20cx%3D%2289%22%20cy%3D%2291%22%20r%3D%222.6%22/%3E%3Crect%20x%3D%22104%22%20y%3D%2284%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%226%22%20y%3D%22105%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%22105%22%20r%3D%222.6%22/%3E%3Crect%20x%3D%2244%22%20y%3D%22105%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Ccircle%20cx%3D%2265%22%20cy%3D%22105%22%20r%3D%222.6%22/%3E%3Crect%20x%3D%2284%22%20y%3D%22107%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3Crect%20x%3D%22107%22%20y%3D%22108%22%20width%3D%225%22%20height%3D%2212%22%20rx%3D%222.5%22/%3E%3C/svg%3E');--ms:120px 120px"></div></div><div class="cap"><span class="caps">Toppings</span></div></div>
+  </div>
+  <div class="swatches" role="group" aria-label="رنگ پترن"><button style="--c:#B2000C" aria-label="قرمز" data-pc="#B2000C" aria-pressed="true"></button><button style="--c:#101820" aria-label="جوهری" data-pc="#101820" aria-pressed="false"></button><button style="--c:#761415" aria-label="بورگوندی" data-pc="#761415" aria-pressed="false"></button><button style="--c:#F2B33D" aria-label="پنیری" data-pc="#F2B33D" aria-pressed="false"></button></div>
+  <p class="cap"><span class="fa">رنگ پترن را عوض کنید؛ قانون برندبوک: همیشه یک رنگ.</span></p>
+  <div style="height:56px"></div>
+  <figure class="fig rv zoom" data-full="/assets/case/pizzaei/pat-use.jpg" style="--w:620px"><img src="/assets/case/pizzaei/pat-use.jpg" width="1400" height="487" alt="کاربرد پترن" loading="lazy" decoding="async" class="" style=""><figcaption class="cap"><span class=caps>Tone-on-tone at 10% · as a band, logo outside it</span></figcaption></figure>
+</div>
+</section>
+
+<section class="divider" id="frame" data-p="pass">
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">28</span></div>
+  <span class="divider__n mono">06</span>
+  <div class="divider__t"><span class="caps">Frame</span><span class="fa">فریم</span></div>
+</section>
+
+<section class="scene fr" data-p="scene" data-fr style="--len:2.4" aria-label="فریم">
+  <div class="scene__stick">
+    <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">30</span></div>
+    <div style="display:grid;justify-items:center">
+      <span class="lbl caps" style="margin-bottom:12px">Frame Guideline</span>
+      <p class="muted" style="font-size:.82rem;margin-bottom:40px;text-align:center">از پوسته‌ی بیرونی نماد گرفته شده: دو گوشه‌ی یک سمت با شعاع 0.2 ضلع کوتاه‌تر، بقیه تیز</p>
+      <div class="fr__box"><span class="mk " aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-mark.png);--ar:0.55;height:46px;color:#D9D7D2"></span></div>
+      <div class="fr__read"><span><b class="mono" data-fr-ratio>1.60</b><span class="caps muted">W : H</span></span><span><b class="mono">0.2 × short side</b><span class="caps muted">Corner radius</span></span><span><b class="mono" data-fr-r>—</b><span class="caps muted">Radius now</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="pg " id="frame-dd" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">31</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>درست و نادرست</h2></div><span class="lbl caps">Frame Do &amp; Don&#x27;t</span></header>
+  <figure class="fig rv zoom" data-full="/assets/case/pizzaei/frame-dd.jpg" style="--w:640px"><img src="/assets/case/pizzaei/frame-dd.jpg" width="1400" height="566" alt="فریم درست و نادرست" loading="lazy" decoding="async" class="" style=""></figure>
+</section>
+
+<section class="divider" id="dodont" data-p="pass">
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">32</span></div>
+  <span class="divider__n mono">07</span>
+  <div class="divider__t"><span class="caps">Do &amp; Don&#x27;t</span><span class="fa">درست و نادرست</span></div>
+</section>
+
+<section class="pg " id="dodont-p" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">33</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>ردیف بالا درست؛ دو ردیف پایین نادرست</h2><p>کشیدن، چرخاندن، دورگیری، رنگ خارج از پالت، افکت، تایپ‌کردن نام، بهم‌ریختن لاک‌آپ، کنتراست کم و…</p></div><span class="lbl caps">Do &amp; Don&#x27;t</span></header>
+  <figure class="fig rv zoom" data-full="/assets/case/pizzaei/dodont.jpg" style="--w:780px"><img src="/assets/case/pizzaei/dodont.jpg" width="1400" height="563" alt="درست و نادرست لوگو" loading="lazy" decoding="async" class="" style=""></figure>
+</section>
+
+<section class="divider" id="voice" data-p="pass">
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">34</span></div>
+  <span class="divider__n mono">08</span>
+  <div class="divider__t"><span class="caps">Character &amp; Voice</span><span class="fa">کاراکتر و لحن</span></div>
+</section>
+
+<section class="scene vc" data-p="scene" data-steps="4" style="--len:3" aria-label="لحن برند">
+  <div class="scene__stick">
+    <div class="vc__in">
+      <div class="vc__ch"><img src="/assets/case/pizzaei/character.jpg" width="1123" height="927" alt="کاراکتر پیتزائی"  decoding="async" class="" style=""></div>
+      <div>
+        <div class="vc__k">ئی مثل:</div>
+        <div class="vc__words"><span data-s="0">ادائی!</span><span data-s="1">ایتالیائی!</span><span data-s="2">زیبائی!</span><span data-s="3">دانائی!</span></div>
+        <p class="vc__rule">کوتاه، دوستانه و بازیگوش · بازی با «ئی» · حداکثر یک علامت تعجب</p>
+        <p class="vc__en caps">E like Enjoy</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pg " id="character" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">35</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>سرآشپزی که به نماد تکیه داده</h2><p>خط جوهری، رنگ‌های کرم، پیش‌بند قرمز؛ همیشه روی یک خط زمین و همیشه تکیه‌داده به نماد</p></div><span class="lbl caps">Brand Character</span></header>
+  <figure class="fig rv zoom" data-full="/assets/case/pizzaei/character.jpg" style="--w:420px"><img src="/assets/case/pizzaei/character.jpg" width="1123" height="927" alt="کاراکتر برند" loading="lazy" decoding="async" class="" style=""></figure>
+</section>
+
+<section class="divider" id="apps" data-p="pass">
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">37</span></div>
+  <span class="divider__n mono">09</span>
+  <div class="divider__t"><span class="caps">Applications</span><span class="fa">کاربردها</span></div>
+</section>
+
+<section class="pg " id="apps-p" >
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">38</span></div>
+  <header class="pg__head rv"><div class="pg__fa"><h2>از جعبه تا تابلو</h2></div><span class="lbl caps">Applications</span></header>
+  <div class="apps"><div class="app-g"><div class="app-g__h rv"><span class="caps">Packaging</span><span class="fa">بسته‌بندی</span></div><div class="app-row"><figure class="app rv rv-d0 zoom" data-full="/assets/case/pizzaei/box.jpg" style="--h:300px"><div class="app__img"><img src="/assets/case/pizzaei/box.jpg" width="691" height="691" alt="فلکسو · ۱ تا ۲ رنگ · کارتن سفید" loading="lazy" decoding="async" class="" style=""></div><figcaption><span class="caps">Pizza box</span><span class="fa">فلکسو · ۱ تا ۲ رنگ · کارتن سفید</span></figcaption></figure><figure class="app rv rv-d1 zoom" data-full="/assets/case/pizzaei/bag.jpg" style="--h:300px"><div class="app__img"><img src="/assets/case/pizzaei/bag.jpg" width="676" height="695" alt="کرافت · جوهری و قرمز پیتزائی · اطلاعات تماس پشت کیسه" loading="lazy" decoding="async" class="" style=""></div><figcaption><span class="caps">Paper bag</span><span class="fa">کرافت · جوهری و قرمز پیتزائی · اطلاعات تماس پشت کیسه</span></figcaption></figure></div></div><div class="app-g"><div class="app-g__h rv"><span class="caps">Signage &amp; Interior</span><span class="fa">تابلو و فضای داخلی</span></div><div class="app-row"><figure class="app rv rv-d0 zoom" data-full="/assets/case/pizzaei/blade.jpg" style="--h:230px"><div class="app__img"><img src="/assets/case/pizzaei/blade.jpg" width="484" height="725" alt="نوری · فقط نماد" loading="lazy" decoding="async" class="" style=""></div><figcaption><span class="caps">Blade sign</span><span class="fa">نوری · فقط نماد</span></figcaption></figure><figure class="app rv rv-d1 zoom" data-full="/assets/case/pizzaei/store.jpg" style="--h:230px"><div class="app__img"><img src="/assets/case/pizzaei/store.jpg" width="1112" height="739" alt="زمینه‌ی سفید · لوگوتایپ قرمز" loading="lazy" decoding="async" class="" style=""></div><figcaption><span class="caps">Storefront</span><span class="fa">زمینه‌ی سفید · لوگوتایپ قرمز</span></figcaption></figure><figure class="app rv rv-d2 zoom" data-full="/assets/case/pizzaei/interior.jpg" style="--h:230px"><div class="app__img"><img src="/assets/case/pizzaei/interior.jpg" width="1131" height="709" alt="قرمز و جوهری روی کاشی سفید" loading="lazy" decoding="async" class="" style=""></div><figcaption><span class="caps">Interior</span><span class="fa">قرمز و جوهری روی کاشی سفید</span></figcaption></figure></div></div></div>
+</section>
+
+<section class="back" data-p="pass">
+  <div class="furn" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span><div class="side"><span>PIZZAEI BRAND BOOK</span><i></i></div><span class="pno mono">40</span></div>
+  <svg viewBox="0 0 1200 300" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="70" stroke-linecap="round" d="M-40 220 a75 75 0 0 1 150 0 a75 75 0 0 0 150 0 a75 75 0 0 1 150 0 a75 75 0 0 0 150 0 a75 75 0 0 1 150 0 a75 75 0 0 0 150 0 a75 75 0 0 1 150 0 a75 75 0 0 0 150 0 a75 75 0 0 1 150 0 a75 75 0 0 0 150 0"/></svg>
+  <span class="mk " aria-hidden="true" style="--src:url(/assets/case/marks/pizzaei-mark.png);--ar:0.55;height:60px;color:#fff;position:relative"></span>
+  <div class="cover__meta"><span class="caps">E like Enjoy</span><span class="caps" style="opacity:.6">Pizzaei Brand Book — 2026</span></div>
+</section>
+</main>
+<a class="next" href="/work/easydo/" style="--nt:#CA9A8E;--nf:#fff"><span class="mk " aria-hidden="true" style="--src:url(/assets/case/marks/easydo-logo.png);--ar:4.8193;height:48px;"></span><div><div class="next__k">پروژه بعدی</div><div class="next__n">ایزی‌دو</div></div><span class="next__go caps">EasyDo<i></i></span></a>
+<section class="close">
+  <p>همین دقت و همین سیستم را برای شبکه‌ی شما می‌سازیم.</p>
+  <h3>هویت <span class="en"><b>Ad</b>place</span> هم یک برندبوک این‌چنینی می‌شود</h3>
+  <div class="close__a"><a class="btn btn--f" href="/#identity">دیدن پکیج‌ها</a><a class="btn btn--l" href="/#start">شروع پروژه</a></div>
+</section>
+<script>window.BOOK_HOOKS=[];
+BOOK_HOOKS.push(function(el,p){
+  if(!el.hasAttribute('data-fr'))return;
+  var w = 0.7 + p*1.6;   // tall -> wide
+  var box = el.querySelector('.fr__box'); box.style.setProperty('--fw', w.toFixed(3));
+  var H = box.offsetHeight, W = H*w, r = 0.2*Math.min(W,H);
+  box.style.setProperty('--fr', r.toFixed(1)+'px');
+  el.querySelector('[data-fr-ratio]').textContent = w.toFixed(2);
+  el.querySelector('[data-fr-r]').textContent = Math.round(r)+' px';
+});
+document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-pc]'); if(!b)return;
+  document.querySelectorAll('[data-pc]').forEach(function(x){x.setAttribute('aria-pressed', x===b)});
+  document.querySelectorAll('.pat__in').forEach(function(x){x.style.setProperty('--pc', b.getAttribute('data-pc'))});
+});
+</script>
+<script src="/assets/case/book.js" defer></script>
+</body>
+</html>
